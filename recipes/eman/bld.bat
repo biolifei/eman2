@@ -13,5 +13,5 @@ if errorlevel 1 exit 1
 cmake --build "%builddir%" --config Release --target install
 if errorlevel 1 exit 1
 
-cmake --build "%builddir%" --config Release --target test-verbose
+cmake --build "%builddir%" --config Release --target test-progs
 if errorlevel 1 exit 1
