@@ -43,8 +43,13 @@ def isRelease() {
 }
 
 def runCronJob() {
-    echo "bash ${BUILD_SCRIPTS_DIR}/cronjob.sh $STAGE_NAME master"
-    sh "ls ${BUILD_SCRIPTS_DIR}/cronjob.sh"
+    if(SLAVE_OS != "win") {
+        sh "bash ${BUILD_SCRIPTS_DIR}/cronjob.sh $STAGE_NAME master"
+    }
+    else {
+        sh "bash ${BUILD_SCRIPTS_DIR}/cronjob.sh $STAGE_NAME release/windows"
+    }
+    
     if(isRelease())
       echo "rsync -avzh --stats ${INSTALLERS_DIR}/eman2.${STAGE_NAME}.unstable.sh ${DEPLOY_DEST}"
 }
@@ -58,7 +63,7 @@ def setUploadFlag() {
 }
 
 def resetBuildScripts() {
-    if(JOB_TYPE == "cron" || isRelease())
+    if((JOB_TYPE == "cron" || isRelease()) && SLAVE_OS != 'win')
         sh 'cd ${BUILD_SCRIPTS_DIR} && git checkout -f master'
 }
 
