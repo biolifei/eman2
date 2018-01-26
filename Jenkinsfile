@@ -43,10 +43,8 @@ def isRelease() {
 }
 
 def runCronJob() {
-    sh 'env'
-    sh 'echo ${USERPROFILE}/workspace/build-scripts-cron/cronjob.sh $STAGE_NAME master'
-    sh 'ls ${USERPROFILE}/workspace/build-scripts-cron/cronjob.sh'
     echo "bash ${HOME_DIR}/workspace/build-scripts-cron/cronjob.sh $STAGE_NAME master"
+    sh "ls ${HOME_DIR}/workspace/build-scripts-cron/cronjob.sh $STAGE_NAME master"
     if(isRelease())
       echo "rsync -avzh --stats ${INSTALLERS_DIR}/eman2.${STAGE_NAME}.unstable.sh ${DEPLOY_DEST}"
 }
@@ -62,6 +60,18 @@ def setUploadFlag() {
 def resetBuildScripts() {
     if(JOB_TYPE == "cron" || isRelease())
         echo 'cd ${HOME_DIR}/workspace/build-scripts-cron/ && git checkout -f master'
+}
+
+def getHomeDir() {
+    def result = ''
+    if(SLAVE_OS == "win") {
+        result = '${HOME}'
+    }
+    else {
+        result = '${USERPROFILE}'
+    }
+    
+    return result
 }
 
 pipeline {
@@ -83,7 +93,7 @@ pipeline {
     JOB_TYPE = getJobType()
     GIT_BRANCH_SHORT = sh(returnStdout: true, script: 'echo ${GIT_BRANCH##origin/}').trim()
     GIT_COMMIT_SHORT = sh(returnStdout: true, script: 'echo ${GIT_COMMIT:0:7}').trim()
-    HOME_DIR = '${HOME}'
+    HOME_DIR = getHomeDir()
     INSTALLERS_DIR = '${HOME_DIR}/workspace/${STAGE_NAME}-installers'
     DEPLOY_DEST    = 'zope@ncmi.grid.bcm.edu:/home/zope/zope-server/extdata/reposit/ncmi/software/counter_222/software_136/'
     NUMPY_VERSION='1.9'
