@@ -43,6 +43,7 @@ def isRelease() {
 }
 
 def runCronJob() {
+    sh "echo ${HOME_DIR}/workspace/build-scripts-cron/cronjob.sh $STAGE_NAME master"
     echo "bash ${HOME_DIR}/workspace/build-scripts-cron/cronjob.sh $STAGE_NAME master"
     if(isRelease())
       echo "rsync -avzh --stats ${INSTALLERS_DIR}/eman2.${STAGE_NAME}.unstable.sh ${DEPLOY_DEST}"
