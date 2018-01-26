@@ -71,6 +71,7 @@ def getHomeDir() {
         result = '${USERPROFILE}'
     }
     
+    println "SLAVE_OS: " + SLAVE_OS + " result: " + result
     return result
 }
 
