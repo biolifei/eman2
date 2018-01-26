@@ -70,10 +70,10 @@ def resetBuildScripts() {
 def getHomeDir() {
     def result = ''
     if(SLAVE_OS == "win") {
-        result = '${USERPROFILE}'
+        result = "${USERPROFILE}"
     }
     else {
-        result = '${HOME}'
+        result = "${HOME}"
     }
     
     println "SLAVE_OS: " + SLAVE_OS + " result: " + result
