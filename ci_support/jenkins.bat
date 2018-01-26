@@ -3,6 +3,9 @@ set INSTALLER_DIR=C:\Users\EMAN\workspace\win-installers
 set INSTALLER_FILE=eman2.21.win64.exe
 set INSTALLATION_DIR=eman2-21-win64
 
+set
+exit 0
+
 "%BASH_EXE%" -c "bash C:/Users/EMAN/workspace/build-scripts-cron/cronjob.sh win release/windows"
 if errorlevel 1 exit 1
 
