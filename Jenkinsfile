@@ -43,8 +43,6 @@ def isRelease() {
 }
 
 def runCronJob() {
-    sh "echo ${HOME_DIR}/workspace/build-scripts-cron/cronjob.sh $STAGE_NAME master"
-    sh "ls ${HOME_DIR}/workspace/build-scripts-cron/cronjob.sh"
     sh 'env'
     sh "echo ${USERPROFILE}/workspace/build-scripts-cron/cronjob.sh $STAGE_NAME master"
     sh "ls ${USERPROFILE}/workspace/build-scripts-cron/cronjob.sh"
