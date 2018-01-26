@@ -191,6 +191,7 @@ pipeline {
       }
       
       steps {
+        runCronJob()
         bat 'call ci_support/jenkins.bat'
       }
     }
