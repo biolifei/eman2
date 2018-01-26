@@ -95,7 +95,7 @@ pipeline {
     GIT_BRANCH_SHORT = sh(returnStdout: true, script: 'echo ${GIT_BRANCH##origin/}').trim()
     GIT_COMMIT_SHORT = sh(returnStdout: true, script: 'echo ${GIT_COMMIT:0:7}').trim()
     HOME_DIR = getHomeDir()
-    BUILD_SCRIPTS_DIR = '${HOME_DIR}/workspace/build-scripts-cron/'
+    BUILD_SCRIPTS_DIR = "${HOME_DIR}/workspace/build-scripts-cron/"
     INSTALLERS_DIR = '${HOME_DIR}/workspace/${STAGE_NAME}-installers'
     DEPLOY_DEST    = 'zope@ncmi.grid.bcm.edu:/home/zope/zope-server/extdata/reposit/ncmi/software/counter_222/software_136/'
     NUMPY_VERSION='1.9'
