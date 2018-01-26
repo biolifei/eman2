@@ -190,7 +190,7 @@ pipeline {
       }
       
       steps {
-        bat 'call ci_support\jenkins.bat'
+        bat 'call ci_support/jenkins.bat'
       }
     }
   }
