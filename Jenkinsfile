@@ -44,8 +44,8 @@ def isRelease() {
 
 def runCronJob() {
     sh 'env'
-    sh "echo ${USERPROFILE}/workspace/build-scripts-cron/cronjob.sh $STAGE_NAME master"
-    sh "ls ${USERPROFILE}/workspace/build-scripts-cron/cronjob.sh"
+    sh 'echo ${USERPROFILE}/workspace/build-scripts-cron/cronjob.sh $STAGE_NAME master'
+    sh 'ls ${USERPROFILE}/workspace/build-scripts-cron/cronjob.sh'
     echo "bash ${HOME_DIR}/workspace/build-scripts-cron/cronjob.sh $STAGE_NAME master"
     if(isRelease())
       echo "rsync -avzh --stats ${INSTALLERS_DIR}/eman2.${STAGE_NAME}.unstable.sh ${DEPLOY_DEST}"
