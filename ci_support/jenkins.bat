@@ -9,6 +9,7 @@ set
 ::if errorlevel 1 exit 1
 
 rmdir /q /s %INSTALLER_DIR%\%INSTALLATION_DIR%
+del /q /f %INSTALLER_DIR%\%INSTALLER_FILE%
 
 start /wait "" %INSTALLER_DIR%\%INSTALLER_FILE% /InstallationType=JustMe /RegisterPython=0 /AddToPath=0 /S /D=%INSTALLER_DIR%\%INSTALLATION_DIR%
 if errorlevel 1 exit 1
