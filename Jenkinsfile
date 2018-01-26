@@ -102,6 +102,7 @@ pipeline {
       when {
         not { expression { JOB_TYPE == "cron" } }
         not { expression { isRelease() } }
+        not { expression { SLAVE_OS == "win" } }
       }
       
       parallel {
@@ -126,6 +127,7 @@ pipeline {
           expression { JOB_TYPE == "cron" }
           expression { isRelease() }
         }
+        not { expression { SLAVE_OS == "win" } }
       }
       
       steps {
