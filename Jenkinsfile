@@ -43,9 +43,9 @@ def isRelease() {
 }
 
 def runCronJob() {
-    sh "bash ${HOME}/workspace/build-scripts-cron/cronjob.sh $STAGE_NAME master"
+    echo "bash ${HOME}/workspace/build-scripts-cron/cronjob.sh $STAGE_NAME master"
     if(isRelease())
-      sh "rsync -avzh --stats ${INSTALLERS_DIR}/eman2.${STAGE_NAME}.unstable.sh ${DEPLOY_DEST}"
+      echo "rsync -avzh --stats ${INSTALLERS_DIR}/eman2.${STAGE_NAME}.unstable.sh ${DEPLOY_DEST}"
 }
 
 def setUploadFlag() {
@@ -58,7 +58,7 @@ def setUploadFlag() {
 
 def resetBuildScripts() {
     if(JOB_TYPE == "cron" || isRelease())
-        sh 'cd ${HOME}/workspace/build-scripts-cron/ && git checkout -f master'
+        echo 'cd ${HOME}/workspace/build-scripts-cron/ && git checkout -f master'
 }
 
 pipeline {
@@ -107,13 +107,13 @@ pipeline {
       parallel {
         stage('recipe') {
           steps {
-            sh 'bash ci_support/build_recipe.sh'
+            echo 'bash ci_support/build_recipe.sh'
           }
         }
         
         stage('no_recipe') {
           steps {
-            sh 'source $(conda info --root)/bin/activate eman-env && bash ci_support/build_no_recipe.sh'
+            echo 'source $(conda info --root)/bin/activate eman-env && bash ci_support/build_no_recipe.sh'
           }
         }
       }
@@ -129,7 +129,7 @@ pipeline {
       }
       
       steps {
-        sh 'cd ${HOME}/workspace/build-scripts-cron/ && git fetch --prune && (git checkout -f $BUILD_SCRIPTS_BRANCH || git checkout -t origin/$BUILD_SCRIPTS_BRANCH) && git pull --rebase'
+        echo 'cd ${HOME}/workspace/build-scripts-cron/ && git fetch --prune && (git checkout -f $BUILD_SCRIPTS_BRANCH || git checkout -t origin/$BUILD_SCRIPTS_BRANCH) && git pull --rebase'
       }
     }
     
