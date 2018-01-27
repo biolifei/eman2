@@ -1,3 +1,5 @@
+@echo on
+
 set "BASH_EXE=C:\Program Files\Git\bin\bash.exe"
 set INSTALLER_DIR=C:\Users\EMAN\workspace\win-installers
 set INSTALLER_FILE=eman2.21.win64.exe
