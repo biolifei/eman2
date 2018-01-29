@@ -7,6 +7,7 @@ e2speedtest.py
 
 python "${SRC_DIR}/tests/test_imports.py"
 python "${SRC_DIR}/tests/test_EMAN2DIR.py"
+THEANO_FLAGS="device=cuda" python -c "import theano"
 
 if [ $(whoami) != "root" ];then
     mpirun -n 4 $(which python) ${PREFIX}/examples/mpi_test.py

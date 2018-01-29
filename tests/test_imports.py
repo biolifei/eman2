@@ -86,5 +86,3 @@ libpyPointArray2.PointArray.Density2PointsArrayAlgorithm
 
 import libpyProcessor2
 libpyProcessor2.Processor.fourier_filter_types
-
-THEANO_FLAGS="device=cuda" python -c "import theano"
