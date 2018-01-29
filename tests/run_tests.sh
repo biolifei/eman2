@@ -5,6 +5,7 @@ set -xe
 e2version.py
 e2speedtest.py
 
+python "${SRC_DIR}/tests/test_imports.py"
 python "${SRC_DIR}/tests/test_EMAN2DIR.py"
 
 if [ $(whoami) != "root" ];then
